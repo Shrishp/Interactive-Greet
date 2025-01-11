@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Greeting</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            padding: 12px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 250px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .message.show {
+            opacity: 1;
+            transform: translateY(10px);
+        }
+
+        .error {
+            color: #e74c3c;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hey there!</h1>
+        <p>Let’s get to know each other. Just type your name below and click the button.</p>
+        <input type="text" id="nameInput" placeholder="What’s your name?">
+        <button id="greetButton">Greet Me</button>
+        <div id="message" class="message"></div>
+        <div id="error" class="error"></div>
+    </div>
+
+    <script>
+        const nameInput = document.getElementById('nameInput');
+        const greetButton = document.getElementById('greetButton');
+        const message = document.getElementById('message');
+        const error = document.getElementById('error');
+
+        greetButton.addEventListener('click', () => {
+            const name = nameInput.value.trim();
+
+            // Clear previous messages
+            message.textContent = '';
+            error.textContent = '';
+            message.classList.remove('show');
+
+            if (name === '') {
+                error.textContent = 'Oops! Please type your name before clicking the button.';
+                return;
+            }
+
+            message.textContent = `Hi, ${name}! It’s wonderful to meet you!`;
+            message.classList.add('show');
+        });
+    </script>
+</body>
+</html>
